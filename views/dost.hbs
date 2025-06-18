@@ -1,0 +1,60 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Информация о доставке</title>
+		<link rel="stylesheet" href="/css/dost.css" />
+	</head>
+	<body>
+		<header>
+			<div class="logo">
+				<p class="logo-nad">Emex</p>
+			</div>
+			<div class="nav">
+				<div class="nav-one">
+					<img class="img-2" src="../imgs/otzv.png" />
+					<a href="/reviews" class="nav-ph">Отзывы</a>
+				</div>
+				<div class="nav-one">
+					<img class="img-3" src="../imgs/Dost.png" />
+					<a href="/dost" class="nav-ph">Корзина</a>
+				</div>
+				<div class="nav-one">
+					<img class="img-1" src="../imgs/back-arrow_340.png" />
+					<a href="/" class="nav-ph">Назад</a>
+				</div>
+			</div>
+			<div class="burger-menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+		</header>
+		{{#if data.items.length}}
+			<div class="blocks-nav">
+				{{#each data.items}}
+					<div class="blocks">
+						<img class="sot" src="{{this.product.photo}}" />
+						<p class="dol">{{this.product.price}}</p>
+						<p class="naz">{{this.product.name}}</p>
+						<p class="ser">Номер автозапчасти: {{this.product.id}}</p>
+						<form action="/api/cartproducts/{{this.id}}" method="post">
+							<button type="submit" class="del">Удалить из корзины</button>
+						</form>
+					</div>
+				{{/each}}
+			</div>
+			<div class="flex">
+				<form id="order-form">
+					<p class="end">Итого: {{data.total_price}}</p>
+					<input type="hidden" name="total_price" value="{{data.total_price}}" />
+					<input type="tel" maxlength="11" name="phone" class="end" placeholder="Номер телефона" required />
+					<button type="submit" class="button3">Оформить заказ</button>
+				</form>
+			</div>
+		{{else}}
+			<p class="end">Корзина пуста</p>
+		{{/if}}
+	</body>
+	<script src="/js/order.js"></script>
+</html>

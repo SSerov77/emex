@@ -1,0 +1,36 @@
+services:
+  database:
+    image: "postgres:17.2-alpine"
+    container_name: database
+    restart: always
+    environment:
+      POSTGRES_DB: "${DB_HOST}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      - "${DB_PORT}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+
+  express:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: express
+    restart: always
+    environment:
+      - NODE_ENV=prod
+      - DB_HOST=database
+    ports:
+      - "80:3000"
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  postgresql:

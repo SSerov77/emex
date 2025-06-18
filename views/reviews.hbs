@@ -1,0 +1,98 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Отзывы</title>
+	<link rel="stylesheet" href="/css/otzv.css" />
+</head>
+
+<body>
+	<header>
+		<div class="logo">
+			<p class="logo-nad">Emex</p>
+		</div>
+		<div class="nav">
+			<div class="nav-one">
+				<img class="img-2" src="/imgs/otzv.png" />
+				<a href="/reviews" class="nav-ph">Отзывы</a>
+			</div>
+			<div class="nav-one">
+				<img class="img-3" src="/imgs/Dost.png" />
+				<a href="/dost" class="nav-ph">Корзина</a>
+			</div>
+			<div class="nav-one">
+				<img class="img-1" src="/imgs/back-arrow_340.png" />
+				<a href="/" class="nav-ph">Назад</a>
+			</div>
+		</div>
+	</header>
+	<p class="naz">Самые популярные отзывы</p>
+	{{#each reviews}}
+	<div class="block">
+		<img class="ph" src="{{this.photo}}" />
+		<div class="src">
+			<p class="name">{{this.name}}</p>
+			<p class="name3">{{formatDate this.createdAt}}</p>
+			<p class="otzv">
+				{{this.text}}
+			</p>
+		</div>
+	</div>
+	{{/each}}
+	<div class="add-review">
+		<h2 class="naz">Оставить отзыв</h2>
+		<form action="/api/reviews" method="post" enctype="multipart/form-data" id="reviewForm" class="review-form">
+			<div class="form-group">
+				<input type="text" name="name" id="userName" placeholder="Ваше имя" required />
+			</div>
+			<div class="form-group">
+				<textarea id="reviewText" name="text" placeholder="Ваш отзыв" required></textarea>
+			</div>
+			<div class="form-group">
+				<input type="file" name="file" id="userPhoto" accept="image/*" />
+			</div>
+			<button type="submit" class="submit-btn">Отправить</button>
+		</form>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+    const burgerMenu = document.createElement('div');
+    burgerMenu.className = 'burger-menu';
+    burgerMenu.id = 'burgerMenu';
+    burgerMenu.innerHTML = `
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+    `;
+    
+    const header = document.querySelector('header');
+    const logo = document.querySelector('.logo');
+    const nav = document.querySelector('.nav');
+    
+    // Добавляем бургер-меню в header
+    logo.appendChild(burgerMenu);
+    
+    // Обработчик клика по бургер-меню
+    burgerMenu.addEventListener('click', function() {
+        nav.classList.toggle('active');
+        
+        // Анимация бургер-меню
+        const burgerLines = document.querySelectorAll('.burger-line');
+        if (nav.classList.contains('active')) {
+            burgerLines[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+            burgerLines[1].style.opacity = '0';
+            burgerLines[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+        } else {
+            burgerLines.forEach(line => {
+                line.style.transform = '';
+                line.style.opacity = '';
+            });
+        }
+    });
+});
+	</script>
+</body>
+
+</html>

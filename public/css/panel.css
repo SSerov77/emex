@@ -1,0 +1,215 @@
+body {
+    height: 100%;
+    box-sizing: border-box;
+    font-family: "Segoe UI Light", sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 200px 3fr;
+    grid-template-rows: 50px calc(100% - 50px);
+}
+
+.dashboard-header {
+    background-color: #272222;
+    color: #fff;
+    padding: 0 15px;
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.dashboard-header__logo {
+    font-size: 1.2em;
+    color: rgb(255, 255, 255);
+    margin: 0;
+}
+
+.sidebar-menu {
+    background-color: #272222;
+    color: white;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-menu__items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-menu__item > a {
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    display: block;
+    padding: 12px 15px;
+    border-bottom: 1px solid #3a3a3a;
+    transition: background-color 0.3s;
+}
+
+.sidebar-menu__item > a:hover {
+    background-color: #0b1c68;
+}
+
+.main-content {
+    background-color: #f0f0f0;
+    overflow: auto;
+    padding: 15px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    min-width: 600px;
+}
+
+.table thead th {
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 15px;
+    background: #d8d8d8;
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+}
+
+.table tbody td {
+    text-align: left;
+    padding: 12px 15px;
+    font-size: 14px;
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
+    background: #f3f3f3;
+}
+
+.btn {
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #c82333;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 50px auto 1fr;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .sidebar-menu {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        width: 250px;
+        height: calc(100% - 50px);
+        transform: translateX(-100%);
+        z-index: 1000;
+    }
+
+    .sidebar-menu.active {
+        transform: translateX(0);
+    }
+
+    .dashboard-header {
+        grid-column: span 1;
+    }
+
+    .table {
+        display: block;
+        min-width: 100%;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border-bottom: 1px solid #eee;
+    }
+
+    .table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .table td:last-child {
+        border-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-header__logo {
+        font-size: 1em;
+    }
+
+    .table td {
+        padding-left: 40%;
+        font-size: 13px;
+    }
+
+    .table td:before {
+        width: 35%;
+        font-size: 13px;
+    }
+
+    .btn {
+        padding: 4px 8px;
+        font-size: 13px;
+    }
+}

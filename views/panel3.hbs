@@ -1,0 +1,173 @@
+{{!-- <html lang="ru">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Панель</title>
+		<meta name="description" content="админка" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="img/logo.png" />
+		<link rel="stylesheet" href="/css/panel3.css" />
+	</head>
+
+	<body>
+		<div class="container">
+			<header class="dashboard-header">
+				<h1 class="dashboard-header__logo">Панель администратора</h1>
+			</header>
+			<nav class="sidebar-menu">
+				<ul class="sidebar-menu__items">
+					<li class="sidebar-menu__item">
+						<a href="/panel" class="sidebar-menu__item-title">
+							<span>Просмотр текущих отзывов</span>
+						</a>
+					</li>
+					<li class="sidebar-menu__item">
+						<a href="/panel2" class="sidebar-menu__item-title">
+							<span>Пользователи</span>
+						</a>
+					</li>
+					<li class="sidebar-menu__item">
+						<a href="/panel3" class="sidebar-menu__item-title">
+							<span>Добавить Товар</span>
+						</a>
+					</li>
+					<li class="sidebar-menu__item">
+						<a href="/" class="sidebar-menu__item-title">
+							<span>Назад</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="main-content">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Название</th>
+							<th>Цена</th>
+							<th>Фото</th>
+							<th>Добавить товар</th>
+							<th>Удалить товар</th>
+						</tr>
+						{{#each products}}
+							<tr>
+								<th><input class="Naz" value="{{this.name}}" disabled /></th>
+								<th><input value="{{this.price}}" disabled /></th>
+								<th><img id="product-image" src="{{this.photo}}" /></th>
+								<th></th>
+								<th><button class="delete-button" data-id="{{this.id}}">Удалить</button></th>
+							</tr>
+						{{/each}}
+						<tr>
+							<form action="/api/products" method="post" enctype="multipart/form-data">
+								<th><input class="Naz" type="text" name="name" required /></th>
+								<th><input type="number" name="price" step="0.01" required /></th>
+								<th><input type="file" name="photo" accept="image/*" /></th>
+								<th><button type="submit">Добавить автозапчасть</button></th>
+								<th></th>
+							</form>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</main>
+		</div>
+		<script src="/js/panel.js"></script>
+	</body>
+</html> --}}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Панель</title>
+    <meta name="description" content="админка" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="icon" href="img/logo.png" />
+    <link rel="stylesheet" href="/css/panel3.css" />
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <h1 class="dashboard-header__logo">Панель администратора</h1>
+            <div class="burger-menu" id="burgerMenu">
+                <div class="burger-menu__line"></div>
+                <div class="burger-menu__line"></div>
+                <div class="burger-menu__line"></div>
+            </div>
+        </header>
+        <nav class="sidebar-menu" id="sidebarMenu">
+            <ul class="sidebar-menu__items">
+                <li class="sidebar-menu__item">
+                    <a href="/panel" class="sidebar-menu__item-title">
+                        <span>Просмотр текущих отзывов</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu__item">
+                    <a href="/panel2" class="sidebar-menu__item-title">
+                        <span>Пользователи</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu__item">
+                    <a href="/panel3" class="sidebar-menu__item-title">
+                        <span>Добавить Товар</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu__item">
+                    <a href="/" class="sidebar-menu__item-title">
+                        <span>Назад</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th class="mobile-hide">Цена</th>
+                            <th class="mobile-hide">Фото</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                            <tr>
+                                <td data-label="Название"><input class="Naz" value="{{this.name}}" disabled /></td>
+                                <td class="mobile-hide" data-label="Цена"><input value="{{this.price}}" disabled /></td>
+                                <td class="mobile-hide" data-label="Фото"><img class="product-image" src="{{this.photo}}" /></td>
+                                <td class="actions-cell" data-label="Действия">
+                                    <button class="delete-button" data-id="{{this.id}}">Удалить</button>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        <tr class="add-form">
+                            <form action="/api/products" method="post" enctype="multipart/form-data">
+                                <td data-label="Название"><input class="Naz" type="text" name="name" required /></td>
+                                <td class="mobile-hide" data-label="Цена"><input type="number" name="price" step="0.01" required /></td>
+                                <td class="mobile-hide" data-label="Фото"><input type="file" name="photo" accept="image/*" /></td>
+                                <td class="actions-cell" data-label="Действия">
+                                    <button type="submit" class="add-button">Добавить</button>
+                                </td>
+                            </form>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const burgerMenu = document.getElementById('burgerMenu');
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            
+            burgerMenu.addEventListener('click', function() {
+                this.classList.toggle('active');
+                sidebarMenu.classList.toggle('active');
+            });
+        });
+    </script>
+    <script src="/js/panel.js"></script>
+</body>
+</html>

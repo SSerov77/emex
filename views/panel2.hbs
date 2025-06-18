@@ -1,0 +1,146 @@
+{{!-- <html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<title>Панель</title>
+		<meta name="description" content="админка" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="img/logo.png" />
+		<link rel="stylesheet" href="/css/panel2.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<header class="dashboard-header">
+				<h1 class="dashboard-header__logo">Панель администратора</h1>
+			</header>
+			<nav class="sidebar-menu">
+				<ul class="sidebar-menu__items">
+					<li class="sidebar-menu__item">
+						<a href="/panel" class="sidebar-menu__item-title">
+							<span>Просмотр текущих отзывов</span>
+						</a>
+					</li>
+					<li class="sidebar-menu__item">
+						<a href="/panel2" class="sidebar-menu__item-title">
+							<span>Пользователи</span>
+						</a>
+					</li>
+					<li class="sidebar-menu__item">
+						<a href="/panel3" class="sidebar-menu__item-title">
+							<span>Добавить Товар</span>
+						</a>
+					</li>
+					<li class="sidebar-menu__item">
+						<a href="/" class="sidebar-menu__item-title">
+							<span>Назад</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="main-content">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>username</th>
+							<th>email</th>
+							<th>password</th>
+							<th>role_id</th>
+							<th>createdAt</th>
+							<th>deletedAt</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each users}}
+							<tr>
+								<td>{{this.id}}</td>
+								<td>{{this.username}}</td>
+								<td>{{this.email}}</td>
+								<td>******</td>
+								<td>{{this.role_id}}</td>
+								<td>{{formatDate this.createdAt}}</td>
+								<td>{{#if this.deletedAt}}{{formatDate this.deletedAt}}{{else}}-{{/if}}</td>
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</main>
+		</div>
+	</body>
+</html> --}}
+
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<title>Панель</title>
+		<meta name="description" content="админка" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="img/logo.png" />
+		<link rel="stylesheet" href="/css/panel.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<header class="dashboard-header">
+				<button class="mobile-menu-toggle" id="mobileMenuToggle">
+					<i class="fas fa-bars"></i>
+				</button>
+				<h1 class="dashboard-header__logo">Панель администратора</h1>
+			</header>
+			<nav class="sidebar-menu" id="sidebarMenu">
+				<ul class="sidebar-menu__items">
+					<li class="sidebar-menu__item">
+						<a href="/panel" class="sidebar-menu__item-title">
+							<span>Просмотр текущих отзывов</span>
+						</a>
+					</li>
+					<li class="sidebar-menu__item">
+						<a href="/panel2" class="sidebar-menu__item-title">
+							<span>Пользователи</span>
+						</a>
+					</li>
+					<li class="sidebar-menu__item">
+						<a href="/panel3" class="sidebar-menu__item-title">
+							<span>Добавить Товар</span>
+						</a>
+					</li>
+					<li class="sidebar-menu__item">
+						<a href="/" class="sidebar-menu__item-title">
+							<span>Назад</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<main class="main-content">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>username</th>
+							<th>email</th>
+							<th>password</th>
+							<th>role_id</th>
+							<th>createdAt</th>
+							<th>deletedAt</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each users}}
+							<tr>
+								<td>{{this.id}}</td>
+								<td>{{this.username}}</td>
+								<td>{{this.email}}</td>
+								<td>******</td>
+								<td>{{this.role_id}}</td>
+								<td>{{formatDate this.createdAt}}</td>
+								<td>{{#if this.deletedAt}}{{formatDate this.deletedAt}}{{else}}-{{/if}}</td>
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</main>
+		</div>
+		
+		<script src="/js/panel.js"></script>
+	</body>
+</html>

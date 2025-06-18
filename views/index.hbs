@@ -1,0 +1,155 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Emex</title>
+		<link rel="stylesheet" href="/css/main.css" />
+		<link rel="stylesheet" href="/css/index.css" />
+	</head>
+	<body>
+		<header>
+			<div class="logo">
+				<p class="logo-nad">Emex</p>
+			</div>
+			<button class="burger-btn" aria-label="Меню">
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+  </button>
+			<div class="nav">
+				<div class="nav-one">
+					<img class="img-2" src="/imgs/otzv.png" />
+					<a href="/reviews" class="nav-ph">Отзывы</a>
+				</div>
+				<div class="nav-one">
+					<img class="img-3" src="/imgs/Dost.png" />
+					<a href="/dost" class="nav-ph">Корзина</a>
+				</div>
+				<div class="nav-one">
+					<img class="img-1" src="/imgs/vhod2.png" />
+					{{#if user}}
+						<span id="user-info">
+							<span id="username">{{user.username}}</span>
+							<form action="/api/auth/logout" method="post">
+								<button type="submit" id="logout-link">Выйти</button>
+							</form>
+						</span>
+					{{else}}
+						<a href="#" id="login-link" class="nav-ph">Вход</a>
+					{{/if}}
+				</div>
+			</div>
+		</header>
+		<div class="f-block">
+			<div class="podglav">
+				<p class="block-glav">Автозапчасти вовремя</p>
+				<p class="opis-mast">
+					Подбор автозапчастей в Кувандыке, как и в любом другом городе, требует от эксперта<br />
+					глубоких знаний в области автомобильной техники, а также понимания потребностей клиентов.
+				</p>
+			</div>
+			<img class="eng-ph" src="/imgs/master.webp" />
+		</div>
+		<p class="tov">Популярные товары</p>
+		<div class="blocks-nav">
+			{{#each firstProducts}}
+				<div class="blocks">
+					<img class="sot" src="{{this.photo}}" />
+					<p class="dol">{{this.price}}</p>
+					<p class="naz">{{this.name}}</p>
+					<p class="ser">Номер автозапчасти: {{this.id}}</p>
+					<form class="product-form">
+						<input type="hidden" name="product_id" value="{{this.id}}" />
+						<button type="submit" class="zak">Заказать</button>
+					</form>
+				</div>
+			{{/each}}
+		</div>
+		<div class="blocks-2">
+			<img class="zas-nav" src="{{middleProduct.photo}}" />
+			<div class="dop">
+				<p class="naz-nav">{{middleProduct.name}}</p>
+				<p class="opis">
+					На двигателе ЛАДА Приора - ВАЗ 21116, установлен блок цилиндров высотой - 197,1 мм. Для финишной обработки
+					поверхности цилиндров блока, применяется платохонингование( как на блоке 21126). Для более интенсивного
+					охлаждения поршней в блоке предусмотренны масляные форсунки. Коленчатый вал мод. 11183 имеет радиус кривошипа
+					37,8 мм. Изменение привода ГРМ потребовало применения новой дистанционной шайбы на колен.вале(21116 -1005317),
+					для правильного положения шкивов. На двигателе ЛАДА Приора ВАЗ 21116 применена шатунно-поршневая группа от
+					Federal Mogul – 21116 -1004010. Оригинальный поршень мод. 21116, шатун модели 11194(используется в комплекте
+					ШПГ 21126), поршневые кольца с высотой - 1,2/1,5/2 мм. В итоге, получено значительное снижение массы
+					шатунно-поршневой группы, что повлияло на улучшение основных технических показателей - увеличение мощности,
+					снижение вибрации и шума, уменьшение удельного расхода топлива.
+				</p>
+				<form class="product-form product-form-driver">
+					<input type="hidden" name="product_id" value="{{middleProduct.id}}" />
+					<button type="submit" class="butt2">Заказать</button>
+				</form>
+			</div>
+		</div>
+		<p class="name2">Распродажа</p>
+		<div class="blocks3">
+			<div class="photo">
+				<img class="img-ras" src="/imgs/pol.jpg" />
+				{{#each lastProducts}}
+					<div class="blocks">
+						<img class="sot" src="{{this.photo}}" />
+						<p class="dol">{{this.price}}</p>
+						<p class="naz">{{this.name}}</p>
+						<p class="ser">Номер автозапчасти: {{this.id}}</p>
+						<form class="product-form">
+							<input type="hidden" name="product_id" value="{{this.id}}" />
+							<button type="submit" class="zak">Заказать</button>
+						</form>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+		<p class="name2">Магазин на карте</p>
+		<div class="map-container">
+			<iframe
+				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d853.5719371518857!2d57.38357559617897!3d51.47634181323396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x417fad66b7714dcb%3A0xbe99c025a9a02d96!2z0JDQstGC0L7Qt9Cw0L_Rh9Cw0YHRgtC4INCV0LzQtdC60YE!5e0!3m2!1sru!2sru!4v1744113035001!5m2!1sru!2sru"
+			>
+			</iframe>
+		</div>
+		<div class="footer">
+			<a href="/panel2" class="foot">Панель Администратора</a>
+		</div>
+		<div id="auth-popup" class="auth-popup">
+			<div class="auth-popup-content">
+				<span class="auth-close-popup">&times;</span>
+				<div id="auth-login-form" class="auth-form">
+					<h2 class="auth-form-title">Авторизация</h2>
+					<form id="auth-login" class="auth-form-container">
+						<input type="email" id="auth-login-email" class="auth-input" placeholder="Email" required />
+						<input type="password" id="auth-login-password" class="auth-input" placeholder="Пароль" required />
+						<button type="submit" class="auth-button">Войти</button>
+					</form>
+					<p class="auth-form-text">
+						Нет аккаунта?
+						<a href="#" id="auth-show-register" class="auth-link">Зарегистрироваться</a>
+					</p>
+				</div>
+				<div id="auth-register-form" class="auth-form" style="display: none">
+					<h2 class="auth-form-title">Регистрация</h2>
+					<form id="auth-register" class="auth-form-container">
+						<input type="text" id="auth-register-username" class="auth-input" placeholder="Имя пользователя" required />
+						<input type="email" id="auth-register-email" class="auth-input" placeholder="Email" required />
+						<input type="password" id="auth-register-password" class="auth-input" placeholder="Пароль" required />
+						<input
+							type="password"
+							id="auth-register-password-confirm"
+							class="auth-input"
+							placeholder="Повторите пароль"
+							required
+						/>
+						<div id="auth-register-error" class="auth-error-message" style="display: none">Пароли не совпадают</div>
+						<button type="submit" class="auth-button">Зарегистрироваться</button>
+					</form>
+					<p class="auth-form-text">Есть аккаунт? <a href="#" id="auth-show-login" class="auth-link">Войти</a></p>
+				</div>
+			</div>
+		</div>
+		<script src="/js/auth.js"></script>
+		<script src="/js/productAdd.js"></script>
+	</body>
+</html>
